@@ -1,0 +1,27 @@
+# 	Gero Dolfus
+# 	University of Helsinki, HECER
+# 	Start: February 2014.
+
+Plot data from the national accounts using the IRIS toolbox 
+http://www.iris-toolbox.com .
+
+
+
+main.m                  Start up 
+                        Read the data into memory.
+                        Run the scripts below.
+
+raw_plots.m		        Plot the raw series.
+
+rel_plots.m             Plot series relative to a base year.
+                        For the base year, the value is equal to 100.
+
+trend_linear_plots.m    Estimate a log-linear trend.
+                        Plot the trend alongside the original series.
+                        Plot the residuals.
+
+hp_plots.m		        HP filter the series using the HP filter from Dynare.
+                        Plot the series.
+                        
+
+
