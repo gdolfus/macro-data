@@ -1,3 +1,7 @@
 Make an extra script for reading the data so that I can easily switch between different data sources.
 
+make the picture names a fixed variable
+
+enable reading US data
+
 Remove the colons from the XTicks of annual plots.
