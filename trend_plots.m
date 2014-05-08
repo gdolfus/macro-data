@@ -58,8 +58,8 @@ set(leg,'Location','NorthWest','FontSize',18);
 % grid on
 box off
 set(gca,'XGrid','off','YGrid','on','ZGrid','off','FontSize',16)
-saveas(gcf, strcat(picdirectory,'antti-gdp-trend'), 'pdf')
-saveas(gcf, strcat(picdirectory,'antti-gdp-trend'), 'epsc')
+saveas(gcf, strcat(picdirectory,whichdata,'-gdp-trend'), 'pdf')
+saveas(gcf, strcat(picdirectory,whichdata,'-gdp-trend'), 'epsc')
 
 
 
@@ -74,7 +74,7 @@ legend('Residuals');
 title('GDP')
 hold on;
 plot(zerots,'k--');
-saveas(gcf, strcat(picdirectory,'antti-gdp-res'), 'pdf')
+saveas(gcf, strcat(picdirectory,whichdata,'-gdp-res'), 'pdf')
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 % Split it into the time before and after the recession.
@@ -107,14 +107,14 @@ plot(logy_ts_pre,'b--');
 hold on;
 plot(b(1)+lintrend_ts,'r');
 legend('Log of Original Series','Linear Time Trend');
-saveas(gcf, strcat(picdirectory,'antti-gdp-trend-pres'), 'pdf')
+saveas(gcf, strcat(picdirectory,whichdata,'-gdp-trend-pres'), 'pdf')
 
 figure;
 plot(range_pre_1990s,residuals);
 legend('Residuals');
 hold on;
 plot(zerots,'k--');
-saveas(gcf, strcat(picdirectory,'antti-gdp-res-pre'), 'pdf')
+saveas(gcf, strcat(picdirectory,whichdata,'-gdp-res-pre'), 'pdf')
 
 
 range_post_1990s = qq(1991,2):qq(2011,1);
@@ -146,13 +146,13 @@ plot(logy_ts_post,'b--');
 hold on;
 plot(b(1)+lintrend_ts,'r');
 legend('Log of Original Series','Linear Time Trend');
-saveas(gcf, strcat(picdirectory,'antti-gdp-trend-pre'), 'pdf')
+saveas(gcf, strcat(picdirectory,whichdata,'-gdp-trend-pre'), 'pdf')
 
 figure;
 plot(range_post_1990s,residuals);
 legend('Residuals');
 hold on;
 plot(zerots,'k--');
-saveas(gcf, strcat(picdirectory,'antti-gdp-trend-post'), 'pdf')
+saveas(gcf, strcat(picdirectory,whichdata,'-gdp-trend-post'), 'pdf')
 
 
