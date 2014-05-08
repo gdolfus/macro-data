@@ -2,12 +2,13 @@
 # 	University of Helsinki, HECER
 # 	Start: February 2014.
 
-Plot data from the national accounts using the IRIS toolbox 
-http://www.iris-toolbox.com .
+Plot data key macro data using the IRIS toolbox.
+Data from Finland and the US (Great Depression and Post-WW II).
+See http://www.iris-toolbox.com .
 
 
 
-main.m                  Start up 
+main.m                  Start up.
                         Read the data into memory.
                         Run the scripts below.
 
@@ -20,7 +21,7 @@ trend_linear_plots.m    Estimate a log-linear trend.
                         Plot the trend alongside the original series.
                         Plot the residuals.
 
-hp_plots.m		        HP filter the series using the HP filter from Dynare.
+hp_plots.m              HP filter the series using the HP filter from Dynare.
                         Plot the series.
                         
 
