@@ -8,13 +8,26 @@
 
 % =========================================================================
 
+% -------------------------------------------------------------------------
+%
+%   Use Iristoolbox to create nice pictures.
+%
+% -------------------------------------------------------------------------
+
+%irisstartup;
+
+% -------------------------------------------------------------------------
+%
+%   Setup.
+%
+% -------------------------------------------------------------------------
 
 
 clear;clc;close all;
 
 picdirectory = '~/RRR_finn/pics/';
 
-which = 'us';
+which = 'kp';
 
 if(strcmp(which,'fin')==1)
     
@@ -30,11 +43,8 @@ if(strcmp(which,'fin')==1)
     % Base year for plots.
     whichbase = 1990;
     % Time range for plots.
-    whichstartplot = 1985;
-    whichendplot = 1997;
-    % Time range for data.
-    whichstart = 1975;
-    whichend =2011;
+    whichstart = 1985;
+    whichend =1997;
     % Flag for using annual data.
     annual = 1;
     
@@ -54,11 +64,8 @@ if(strcmp(which,'us')==1)
     % Base year for plots.
     whichbase = 2007;
     % Time range for plots.
-    whichstartplot = 2003;
-    whichendplot = 2014;
-    % Time range for data.
-    whichstart = 1975;
-    whichend =2011;
+    whichstart = 2003;
+    whichend =2013;
     % Flag for using annual data.
     annual = 1;
     
@@ -66,7 +73,7 @@ end
 
 
 
-if(strcmp(which,'us-vintage')==1)
+if(strcmp(which,'kp')==1)
     
     datadirectory = '~/RRR_finn/data/kehoeprescott/';
     
@@ -78,25 +85,16 @@ if(strcmp(which,'us-vintage')==1)
     % Choose options for relative plots.
     
     % Base year for plots.
-    whichbase = 2007;
+    whichbase = 1929;
     % Time range for plots.
-    whichstartplot = 2003;
-    whichendplot = 2014;
-    % Time range for data.
-    whichstart = 1975;
-    whichend =2011;
+    whichstart = 1928;
+    whichend =1938;
     % Flag for using annual data.
     annual = 1;
     
 end
 
-% -------------------------------------------------------------------------
-%
-%   Use Iristoolbox to create nice pictures.
-%
-% -------------------------------------------------------------------------
 
-irisstartup;
 
 % -------------------------------------------------------------------------
 %
@@ -123,6 +121,13 @@ if(strcmp(which,'fin')==1)
     data2 = csvread(strcat(datadirectory,'Data2Gero_2nd_sheet.csv'),1,1);
     inv = data2(7,:);
     
+    % Preparations for Iris toolbox.
+    % Define the ranges.
+    range = qq(1975,1):qq(2011,1);
+    
+    % The range for the investment is longer.
+    range2 = qq(1960,1):qq(2011,3);
+    
 end
 
 if(strcmp(which,'us')==1)
@@ -146,7 +151,43 @@ if(strcmp(which,'us')==1)
     empl=empl(:,2);
     cpi=cpi(:,2);
     gov=gov(:,2);
+    
+    % Preparations for Iris toolbox.
+    % Define the ranges.
+    range = qq(1947,1):qq(2014,1);
+    % The employment data is longer.
+    range2=qq(1939,1):qq(2014,1);
+    
 end
+
+
+
+if(strcmp(which,'kp')==1)
+    
+    % US data for the Great Depression from Kehoe and Prescott.
+    
+    
+    tmp=     xlsread(strcat(datadirectory,'USData.xls'));
+    
+    gdp = tmp(6:26,4);
+    cons = tmp(6:26,25);
+    inv = tmp(6:26,35);
+    empl =tmp(6:26,5);
+    cpi = tmp(6:26,89);
+    gov =  tmp(6:26,32);
+    
+    
+    
+    %     cpi(any(isnan(cpi),2))=[];
+    %     gov(any(isnan(gov),2))=[];
+    %
+    range = yy(1919):yy(1939);
+    % The gov data is shorter.
+    %    range2= yy(1929):yy(1939);
+    % So is the cpi data.
+    %   range3= yy(1920):yy(1929);
+end
+
 
 % -------------------------------------------------------------------------
 %
@@ -156,53 +197,51 @@ end
 
 
 
-if(strcmp(which,'fin')==1)
-    % Define the ranges.
-    range = qq(1975,1):qq(2011,1);
-    % The range for the investment is longer.
-    range2 = qq(1960,1):qq(2011,3);
-    % The range for the bankruptcy data.
-    range3 = mm(1986,1):mm(2013,4);
-    
-end
-
-if(strcmp(which,'us')==1)
-    
-    
-    range = qq(1947,1):qq(2014,1);
-    
-    
-end
-
-
-
-
 gdpts = tseries(range,gdp);
 consts = tseries(range,cons);
-govts = tseries(range,gov);
-cpits = tseries(range,cpi);
 
 if(strcmp(which,'fin')==1)
     invts = tseries(range2,inv);
     invts = invts{range};
     emplts = tseries(range,empl);
-
-else
+    govts = tseries(range,gov);
+    cpits = tseries(range,cpi);
+    
+elseif(strcmp(which,'us')==1)
     invts = tseries(range,inv);
-    emplts = tseries(qq(1939,1):qq(2014,1),empl);
+    emplts = tseries(range2,empl);
     emplts = emplts{range};
+    govts = tseries(range,gov);
+    cpits = tseries(range,cpi);
+    
+elseif(strcmp(which,'kp')==1)
+    govts = tseries(range,gov);
+    %    govts = govts{range};
+    invts = tseries(range,inv);
+    emplts = tseries(range,empl);
+    cpits = tseries(range,cpi);
+    %    cpits = cpits{range};
+    
 end
 
 
 
-
-
-annualgdpts = convert(gdpts,'y',range,'method',@mean);
-annualconsts = convert(consts,'y',range,'method',@mean);
-annualinvts=convert(invts,'y',range,'method',@mean);
-annualgovts=convert(govts,'y',range,'method',@mean);
-annualemplts=convert(emplts,'y',range,'method',@mean);
-
+if(strcmp(which,'kp')==1)% The Kehoe-Prescott data is annual.
+    annualgdpts = gdpts;
+    annualconsts =consts;
+    annualinvts=invts;
+    annualgovts=govts;
+    annualemplts=emplts;
+    
+    
+else
+    annualgdpts = convert(gdpts,'y',range,'method',@mean);
+    annualconsts = convert(consts,'y',range,'method',@mean);
+    annualinvts=convert(invts,'y',range,'method',@mean);
+    annualgovts=convert(govts,'y',range,'method',@mean);
+    annualemplts=convert(emplts,'y',range,'method',@mean);
+    
+end
 
 % -------------------------------------------------------------------------
 %
@@ -252,8 +291,12 @@ addpath ~/stuffialwaysneed/matlab
 
 
 close all;
+if(strcmp(which,'kp')~=1)
+    % The Kehoe-Prescott data is annual.
+    % The HP script is written for quarterly data.
 
 run hp_plots
 
+end
 
 
