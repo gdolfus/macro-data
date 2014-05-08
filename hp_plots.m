@@ -24,7 +24,7 @@ plot(hpgdpts);
 hold on;
 plot(hpzeroline,'k-');
 title('GDP');
-saveas(gcf, strcat(picdirectory,'antti-gdp-hp'), 'pdf');
+saveas(gcf, strcat(picdirectory,whichdata,'-gdp-hp'), 'pdf');
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 % Consumption
@@ -36,7 +36,7 @@ plot(hpconsts,'r');
 hold on
 plot(hpzeroline,'k-');
 title('Private Consumption');
-saveas(gcf, strcat(picdirectory,'antti-cons-hp'), 'pdf');
+saveas(gcf, strcat(picdirectory,whichdata,'-cons-hp'), 'pdf');
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 % Investment
@@ -48,7 +48,7 @@ figure;
 plot(hpinvts,'k');hold on;
 plot(hpzeroline,'k-');
 title('Investment');
-saveas(gcf, strcat(picdirectory,'antti-inv-hp'), 'pdf');
+saveas(gcf, strcat(picdirectory,whichdata,'-inv-hp'), 'pdf');
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 % Government expenditure
@@ -60,7 +60,7 @@ plot(hpgovts,'g');
 hold on;
 plot(hpzeroline,'k-');
 title('Government Consumption');
-saveas(gcf, strcat(picdirectory,'antti-gov-hp'), 'pdf');
+saveas(gcf, strcat(picdirectory,whichdata,'-gov-hp'), 'pdf');
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 % Employment
