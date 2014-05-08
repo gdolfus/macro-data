@@ -1,21 +1,22 @@
 % -------------------------------------------------------------------------
-% 
+%
 %   Plot changes.
 %
 % -------------------------------------------------------------------------
 
-basechoice = qq(1990,1);
-basechoicelabel = '1990';
 
-plotrangetmp = qq(1985,1):qq(1997,4);
+
+basechoice = qq(whichbase,1);
+basechoicelabel = num2str(whichbase);
+
+plotrangetmp = qq(whichstartplot,1):qq(whichendplot,4);
 rangetmp =range;
 
-annual = 1;
 
 if(annual==1)
-    basechoice = yy(1990);
-    plotrangetmp = yy(1985):yy(1997);
-    rangetmp =yy(1975):yy(2011);
+    basechoice = yy(whichbase);
+    plotrangetmp = yy(whichstartplot):yy(whichendplot);
+    rangetmp =yy(whichstart):yy(whichend);
 end
 
 
@@ -38,7 +39,7 @@ gdptmp_rel = tseries(rangetmp,gdp_rel);
 figure;
 plot(gdptmp_rel{plotrangetmp});
 title('GDP')
-saveas(gcf, strcat(picdirectory,'antti-gdp-rel'), 'pdf')
+saveas(gcf, strcat(picdirectory,whichdata,'-gdp-rel'), 'pdf')
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 % Consumption
@@ -57,7 +58,7 @@ constmp_rel = tseries(rangetmp,cons_rel);
 figure;
 plot(constmp_rel{plotrangetmp});
 title('cons')
-saveas(gcf, strcat(picdirectory,'antti-cons-rel'), 'pdf')
+saveas(gcf, strcat(picdirectory,whichdata,'-cons-rel'), 'pdf')
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 % Investment
@@ -75,7 +76,7 @@ invtmp_rel = tseries(rangetmp,inv_rel);
 figure;
 plot(invtmp_rel{plotrangetmp});
 title('inv')
-saveas(gcf, strcat(picdirectory,'antti-inv-rel'), 'pdf')
+saveas(gcf, strcat(picdirectory,whichdata,'-inv-rel'), 'pdf')
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 % Government consumption
@@ -94,7 +95,7 @@ govtmp_rel = tseries(rangetmp,gov_rel);
 figure;
 plot(govtmp_rel{plotrangetmp});
 title('gov')
-saveas(gcf, strcat(picdirectory,'antti-gov-rel'), 'pdf')
+saveas(gcf, strcat(picdirectory,whichdata,'-gov-rel'), 'pdf')
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 % Employment
@@ -103,7 +104,7 @@ saveas(gcf, strcat(picdirectory,'antti-gov-rel'), 'pdf')
 
 if(annual==1)
     empltmp = annualemplts;
-
+    
 else
     empltmp = emplts;
 end
@@ -115,38 +116,9 @@ empltmp_rel = tseries(rangetmp,empl_rel);
 figure;
 plot(empltmp_rel{plotrangetmp});
 title('empl')
-saveas(gcf, strcat(picdirectory,'antti-empl-rel'), 'pdf')
+saveas(gcf, strcat(picdirectory,whichdata,'-empl-rel'), 'pdf')
 
 
-
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-% Bankruptcies.
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-if(annual==1)
-    busttmp = annualbustts;
-
-else
-    busttmp = bustts;
-end
-
-basebust=busttmp{basechoice};
-bust_rel=100*busttmp(rangetmp)/basebust;
-busttmp_rel = tseries(rangetmp,bust_rel);
-
-figure;
-plot(plotrangetmp,busttmp_rel{plotrangetmp},'LineStyle','-','Color','b','LineWidth',1.75,'MarkerFaceColor','auto');
-leg = legend('Bankruptcies');
-% set(leg,'Location','Best')
-set(leg,'Location','NorthWest','FontSize',18);% grid on
-box off
-set(gca,'XGrid','off','YGrid','on','ZGrid','off','FontSize',16);
-ylabel(strcat(basechoicelabel,' = 100'))
-
-
-
-saveas(gcf, strcat(picdirectory,'antti-bust-rel'), 'pdf')
-saveas(gcf, strcat(picdirectory,'antti-bust-rel'), 'epsc')
 
 
 
@@ -170,12 +142,12 @@ set(leg,'Location','SouthWest','FontSize',18);
 box off
 set(gca,'XGrid','off','YGrid','on','ZGrid','off','FontSize',16,'XTick',...
     (round(plotrangetmp(1)):2:round(plotrangetmp(end))));
-%set(gca,'XTickLabel',num2str(round(plotrangetmp(1)):2:round(plotrangetmp(end)))); 
+%set(gca,'XTickLabel',num2str(round(plotrangetmp(1)):2:round(plotrangetmp(end))));
 ylabel(strcat(basechoicelabel,' = 100'))%,'FontSize',16)
 
 
-saveas(gcf, strcat(picdirectory,'antti-gdp-cons-inv-empl-rel'), 'pdf')
-saveas(gcf, strcat(picdirectory,'antti-gdp-cons-inv-empl-rel'), 'epsc')
+saveas(gcf, strcat(picdirectory,whichdata,'-gdp-cons-inv-empl-rel'), 'pdf')
+saveas(gcf, strcat(picdirectory,whichdata,'-gdp-cons-inv-empl-rel'), 'epsc')
 
 
 
@@ -200,15 +172,15 @@ set(leg,'Location','SouthWest','FontSize',18);
 box off
 set(gca,'XGrid','off','YGrid','on','ZGrid','off','FontSize',16);
 ylabel(strcat(basechoicelabel,' = 100'))%,'FontSize',16)
-saveas(gcf, strcat(picdirectory,'antti-gdp-cons-gov-inv-empl-rel'), 'pdf')
-saveas(gcf, strcat(picdirectory,'antti-gdp-cons-gov-inv-empl-rel'), 'epsc')
+saveas(gcf, strcat(picdirectory,whichdata,'-gdp-cons-gov-inv-empl-rel'), 'pdf')
+saveas(gcf, strcat(picdirectory,whichdata,'-gdp-cons-gov-inv-empl-rel'), 'epsc')
 
 
 
 % % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 % % CPI
 % % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-% 
+%
 % cpits = tseries(rangetmp,cpi);
 % figure;
 % plot(cpits);
