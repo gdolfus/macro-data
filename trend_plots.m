@@ -80,6 +80,7 @@ saveas(gcf, strcat(picdirectory,whichdata,'-gdp-res'), 'pdf')
 % Split it into the time before and after the recession.
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+if(strcmp(which,'fin')==1)
 
 range_pre_1990s = qq(1975,1):qq(1991,1);
 
@@ -155,4 +156,4 @@ hold on;
 plot(zerots,'k--');
 saveas(gcf, strcat(picdirectory,whichdata,'-gdp-trend-post'), 'pdf')
 
-
+end
