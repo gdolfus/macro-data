@@ -9,13 +9,11 @@
 basechoice = qq(whichbase,1);
 basechoicelabel = num2str(whichbase);
 
-plotrangetmp = qq(whichstartplot,1):qq(whichendplot,4);
-rangetmp =range;
+rangetmp = qq(whichstart,1):qq(whichend,4);
 
 
 if(annual==1)
     basechoice = yy(whichbase);
-    plotrangetmp = yy(whichstartplot):yy(whichendplot);
     rangetmp =yy(whichstart):yy(whichend);
 end
 
@@ -37,7 +35,7 @@ gdp_rel=100*gdptmp(rangetmp)/basegdp;
 gdptmp_rel = tseries(rangetmp,gdp_rel);
 
 figure;
-plot(gdptmp_rel{plotrangetmp});
+plot(gdptmp_rel{rangetmp});
 title('GDP')
 saveas(gcf, strcat(picdirectory,whichdata,'-gdp-rel'), 'pdf')
 
@@ -56,7 +54,7 @@ cons_rel=100*constmp(rangetmp)/basecons;
 constmp_rel = tseries(rangetmp,cons_rel);
 
 figure;
-plot(constmp_rel{plotrangetmp});
+plot(constmp_rel{rangetmp});
 title('cons')
 saveas(gcf, strcat(picdirectory,whichdata,'-cons-rel'), 'pdf')
 
@@ -74,7 +72,7 @@ inv_rel=100*invtmp(rangetmp)/baseinv;
 invtmp_rel = tseries(rangetmp,inv_rel);
 
 figure;
-plot(invtmp_rel{plotrangetmp});
+plot(invtmp_rel{rangetmp});
 title('inv')
 saveas(gcf, strcat(picdirectory,whichdata,'-inv-rel'), 'pdf')
 
@@ -93,7 +91,7 @@ gov_rel=100*govtmp(rangetmp)/basegov;
 govtmp_rel = tseries(rangetmp,gov_rel);
 
 figure;
-plot(govtmp_rel{plotrangetmp});
+plot(govtmp_rel{rangetmp});
 title('gov')
 saveas(gcf, strcat(picdirectory,whichdata,'-gov-rel'), 'pdf')
 
@@ -114,7 +112,7 @@ empl_rel=100*empltmp(rangetmp)/baseempl;
 empltmp_rel = tseries(rangetmp,empl_rel);
 
 figure;
-plot(empltmp_rel{plotrangetmp});
+plot(empltmp_rel{rangetmp});
 title('empl')
 saveas(gcf, strcat(picdirectory,whichdata,'-empl-rel'), 'pdf')
 
@@ -127,11 +125,11 @@ saveas(gcf, strcat(picdirectory,whichdata,'-empl-rel'), 'pdf')
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 figure;
-plot(plotrangetmp,gdptmp_rel{plotrangetmp},'LineStyle','-','Color','b','LineWidth',1.75,'MarkerFaceColor','auto');
+plot(rangetmp,gdptmp_rel{rangetmp},'LineStyle','-','Color','b','LineWidth',1.75,'MarkerFaceColor','auto');
 hold on
-plot(plotrangetmp,constmp_rel{plotrangetmp},'LineStyle','-','Color','r','LineWidth',1.75,'Marker','o','MarkerFaceColor','r');
-plot(plotrangetmp,invtmp_rel{plotrangetmp},'LineStyle','-','Color','g','LineWidth',1.75,'Marker','^','MarkerFaceColor','g');
-plot(plotrangetmp,empltmp_rel{plotrangetmp},'LineStyle','-','Color','k','LineWidth',1.75,'Marker','x','MarkerFaceColor','k');
+plot(rangetmp,constmp_rel{rangetmp},'LineStyle','-','Color','r','LineWidth',1.75,'Marker','o','MarkerFaceColor','r');
+plot(rangetmp,invtmp_rel{rangetmp},'LineStyle','-','Color','g','LineWidth',1.75,'Marker','^','MarkerFaceColor','g');
+plot(rangetmp,empltmp_rel{rangetmp},'LineStyle','-','Color','k','LineWidth',1.75,'Marker','x','MarkerFaceColor','k');
 
 leg = legend('GDP','Consumption','Investment','Employment');
 % set(leg,'Location','Best')
@@ -140,9 +138,9 @@ set(leg,'Location','SouthWest','FontSize',18);
 
 % grid on
 box off
-set(gca,'XGrid','off','YGrid','on','ZGrid','off','FontSize',16,'XTick',...
-    (round(plotrangetmp(1)):2:round(plotrangetmp(end))));
-%set(gca,'XTickLabel',num2str(round(plotrangetmp(1)):2:round(plotrangetmp(end))));
+set(gca,'XGrid','off','YGrid','on','ZGrid','off','FontSize',16);
+%,'XTick',(round(rangetmp(1)):2:round(rangetmp(end))));
+%set(gca,'XTickLabel',num2str(round(rangetmp(1)):2:round(rangetmp(end))));
 ylabel(strcat(basechoicelabel,' = 100'))%,'FontSize',16)
 
 
@@ -156,17 +154,22 @@ saveas(gcf, strcat(picdirectory,whichdata,'-gdp-cons-inv-empl-rel'), 'epsc')
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 figure;
-plot(plotrangetmp,gdptmp_rel{plotrangetmp},'LineStyle','-','Color','b','LineWidth',1.75,'MarkerFaceColor','auto');
+plot(rangetmp,gdptmp_rel{rangetmp},'LineStyle','-','Color','b','LineWidth',1.75,'MarkerFaceColor','auto');
 hold on
-plot(plotrangetmp,constmp_rel{plotrangetmp},'LineStyle','-','Color','r','LineWidth',1.75,'Marker','o','MarkerFaceColor','r');
-plot(plotrangetmp,govtmp_rel{plotrangetmp},'LineStyle','--','Color','c','LineWidth',1.75,'Marker','d','MarkerFaceColor','c');
-plot(plotrangetmp,invtmp_rel{plotrangetmp},'LineStyle','-','Color','g','LineWidth',1.75,'Marker','^','MarkerFaceColor','g');
-plot(plotrangetmp,empltmp_rel{plotrangetmp},'LineStyle','-','Color','k','LineWidth',1.75,'Marker','x','MarkerFaceColor','k');
+plot(rangetmp,constmp_rel{rangetmp},'LineStyle','-','Color','r','LineWidth',1.75,'Marker','o','MarkerFaceColor','r');
+plot(rangetmp,govtmp_rel{rangetmp},'LineStyle','--','Color','c','LineWidth',1.75,'Marker','d','MarkerFaceColor','c');
+plot(rangetmp,invtmp_rel{rangetmp},'LineStyle','-','Color','g','LineWidth',1.75,'Marker','^','MarkerFaceColor','g');
+plot(rangetmp,empltmp_rel{rangetmp},'LineStyle','-','Color','k','LineWidth',1.75,'Marker','x','MarkerFaceColor','k');
 
 leg = legend('GDP','Consumption','Government Cons','Investment','Employment');
-% set(leg,'Location','Best')
-set(leg,'Location','SouthWest','FontSize',18);
+%set(leg,'Location','Best')
 
+if(strcmp(which,'kp')==1)
+    set(leg,'Location','Best','FontSize',18);
+
+else
+    set(leg,'Location','SouthWest','FontSize',18);
+end
 
 % grid on
 box off
