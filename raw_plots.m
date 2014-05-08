@@ -13,7 +13,7 @@
 figure;
 plot(gdpts);
 title('GDP')
-saveas(gcf, strcat(picdirectory,'antti-gdp'), 'pdf')
+saveas(gcf, strcat(picdirectory,whichdata,'-gdp'), 'pdf')
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 % Consumption
@@ -21,7 +21,7 @@ saveas(gcf, strcat(picdirectory,'antti-gdp'), 'pdf')
 figure;
 plot(consts,'r');
 title('Private Consumption')
-saveas(gcf, strcat(picdirectory,'antti-cons'), 'pdf')
+saveas(gcf, strcat(picdirectory,whichdata,'-cons'), 'pdf')
 
 
 
@@ -38,8 +38,8 @@ leg = legend('GDP','Private Consumption');
 set(leg,'Location','NorthWest')
 grid on
 set(gca,'XGrid','off','YGrid','on','ZGrid','off')
-saveas(gcf, strcat(picdirectory,'antti-gdp-cons'), 'pdf')
-saveas(gcf, strcat(picdirectory,'antti-gdp-cons'), 'epsc')
+saveas(gcf, strcat(picdirectory,whichdata,'-gdp-cons'), 'pdf')
+saveas(gcf, strcat(picdirectory,whichdata,'-gdp-cons'), 'epsc')
 
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -49,7 +49,7 @@ saveas(gcf, strcat(picdirectory,'antti-gdp-cons'), 'epsc')
 figure;
 plot(invts,'k');
 title('Investment')
-saveas(gcf, strcat(picdirectory,'antti-inv'), 'pdf')
+saveas(gcf, strcat(picdirectory,whichdata,'-inv'), 'pdf')
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 % Government consumption
@@ -57,7 +57,7 @@ saveas(gcf, strcat(picdirectory,'antti-inv'), 'pdf')
 figure;
 plot(govts,'g');
 title('Government Consumption')
-saveas(gcf, strcat(picdirectory,'antti-gov'), 'pdf')
+saveas(gcf, strcat(picdirectory,whichdata,'-gov'), 'pdf')
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 % Investment and government consumption
@@ -70,8 +70,8 @@ leg = legend('Investment','Government Consumption');
 set(leg,'Location','Best')
 grid on
 set(gca,'XGrid','off','YGrid','on','ZGrid','off')
-saveas(gcf, strcat(picdirectory,'antti-inv-gov'), 'pdf')
-saveas(gcf, strcat(picdirectory,'antti-inv-gov'), 'epsc')
+saveas(gcf, strcat(picdirectory,whichdata,'-inv-gov'), 'pdf')
+saveas(gcf, strcat(picdirectory,whichdata,'-inv-gov'), 'epsc')
 
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -83,8 +83,8 @@ plot(emplts);
 title('Employment (Thousands of Persons)')
 grid on
 set(gca,'XGrid','off','YGrid','on','ZGrid','off')
-saveas(gcf, strcat(picdirectory,'antti-empl'), 'pdf')
-saveas(gcf, strcat(picdirectory,'antti-empl'), 'epsc')
+saveas(gcf, strcat(picdirectory,whichdata,'-empl'), 'pdf')
+saveas(gcf, strcat(picdirectory,whichdata,'-empl'), 'epsc')
 
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -94,4 +94,4 @@ saveas(gcf, strcat(picdirectory,'antti-empl'), 'epsc')
 figure;
 plot(cpits);
 title('CPI (2005=100)')
-saveas(gcf, strcat(picdirectory,'antti-cpi'), 'pdf')
+saveas(gcf, strcat(picdirectory,whichdata,'-cpi'), 'pdf')
